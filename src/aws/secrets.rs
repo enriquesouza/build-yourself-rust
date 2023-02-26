@@ -1,4 +1,4 @@
-use crate::model::moralis::Moralis;
+use crate::model::secrets::{Moralis, MongoDB};
 use aws_config::meta::region::RegionProviderChain;
 use aws_sdk_secretsmanager::{Client, Error};
 
@@ -34,3 +34,10 @@ pub async fn get_moralis_secret() -> Moralis {
         .await
         .unwrap()
 }
+
+pub async fn get_mongodb_secret() -> MongoDB {
+    get_generic_secret_by_name::<MongoDB>("DB")
+        .await
+        .unwrap()
+}
+    
